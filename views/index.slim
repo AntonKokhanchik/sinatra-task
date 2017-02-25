@@ -1,0 +1,31 @@
+h1 Студенты:
+table.table.table-striped
+  thead
+    tr
+      th Фото
+      th Имя
+      th Фамилия
+      th Отчество
+      th Пол
+      th Курс
+      th Страна
+      th Город
+      th Бывший университет
+      th Бывший курс
+      th Разница сдана
+  tbody
+    -@studing_students.each do |student|
+      tr
+        td 
+          img src="#{student[:photo]}"
+        td = student[:student_name]
+        td = student[:student_surname]
+        td = student[:student_middlename]
+        td = if student[:is_male] then "мужской" else "женский"
+        td = student[:course]
+        td = student[:from_country]
+        td = student[:from_city]
+        td = student[:from_university]
+        td = student[:from_course]
+        td = student[:is_examined]
+    

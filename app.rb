@@ -31,3 +31,13 @@ helpers do
     # а если все 4 условиявыполнены (последние два - есть логин-пароль и они совпадают с секретами), то true и вернётся, иначе false
   end
 end
+
+before do
+  @students = DB[:students]
+  @studing_students = @students.where(is_studing: true).all
+end
+
+get '/' do
+  slim  :index,                                 # задаем индексную страницу и указываем шаблонизатор
+        :layout => "layouts/app".to_sym         # указываем через какой лэйаут она пройдет
+end
