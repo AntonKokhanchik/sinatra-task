@@ -6,6 +6,7 @@ require 'slim'
 require 'rack'
 require 'rake'
 require 'hash_dot'
+require 'yaml'
 
 # из примера беру строчку, мне она, видимо, тоже пригодится
 Hash.use_dot_syntax = true
