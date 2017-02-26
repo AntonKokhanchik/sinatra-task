@@ -1,0 +1,56 @@
+/ задаем тип HTML-документа, в эпоху HTML5 можно ограничиться только типом html
+doctype html
+/ обязательно указываем язык документа
+html lang="ru"
+  
+  head
+    
+    / кроме того, обязательно указываем тип контента
+    meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+    
+    / это для глупенького IE
+    meta http-equiv="X-UA-Compatible" content="IE=edge"
+    
+    / указываем scale-фактор для отображения вьюпорта
+    meta name="viewport" content="width=device-width, initial-scale=1"
+    
+    / фавиконка
+    link rel="shortcut icon" href="/favicon.png" type="image/png"
+    
+    / задаем тайтл страницы
+    title = "Информация о студентах"
+    
+    / задаем мета-тег description
+    meta name="description" content="students info"
+    
+    / задаем мета-тег keywords
+    meta name="keywords" content="students info"
+    
+    / указываем основной файл стилей для Bootstrap 3.3.7
+    link href="/css/bootstrap.min.css" rel="stylesheet"
+    
+    / наш пользоваетльский CSS
+    link href="/css/app.css" rel="stylesheet"
+
+  body
+    nav.navbar.navbar-inverse.navbar-fixed-top
+      .container
+        .navbar-header
+          a.navbar-brand href="/" Информация о студентах
+        #navbar.navbar-collapse.collapse
+          ul.nav.navbar-nav.navbar-right
+            li
+              a href="/admin" Админка
+    .jumbotron
+      ==yield
+    
+    / скрипты мы традиционно подключаем внизу
+    
+    / минифицированный jQuery 3.1.1
+    script src="/js/jquery.min.js"
+    
+    / минифицированный Bootstrap 3.3.7
+    script src="/js/bootstrap.min.js"
+    
+    / наш пользовательский JS
+    script src="/js/app.js"

@@ -13,6 +13,9 @@ table.table.table-striped
       th Бывший университет
       th Бывший курс
       th Разница сдана
+      th 
+        form
+          button.btn.btn-primary Добавить
   tbody
     -@show_list.each do |student|
       tr
@@ -28,4 +31,8 @@ table.table.table-striped
         td = student[:from_university]
         td = student[:from_course]
         td = student[:is_examined]
-    
+        td
+          form.btn-group-vertical
+              button.btn.btn-primary Редактировать
+              button.btn.btn-primary Отчислить
+              

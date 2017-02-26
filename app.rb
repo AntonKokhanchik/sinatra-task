@@ -42,3 +42,8 @@ get '/' do
   slim  :index,                                 # задаем индексную страницу и указываем шаблонизатор
         :layout => "layouts/app".to_sym         # указываем через какой лэйаут она пройдет
 end
+
+get '/admin' do
+  slim  :admin,                                 # задаем индексную страницу и указываем шаблонизатор
+        :layout => "layouts/admin_l".to_sym
+end
