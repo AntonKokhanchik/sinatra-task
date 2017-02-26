@@ -33,16 +33,39 @@ html lang="ru"
     link href="/css/app.css" rel="stylesheet"
 
   body
-    
-    / навигация
-    nav.navbar.navbar-default.navbar-fixed-top
-      a.btn.btn-default.navbar-btn.navbar-right href="/admin" Войти в админку
-
-    .container
-    
-      / через магическое слово yield сюда будет прокинута вьюха,
-      / при этом "==" означает что все HTML-содержимое будет выведено как есть
-      ==yield
+    nav.navbar.navbar-inverse.navbar-fixed-top
+      .container
+        .navbar-header
+          a.navbar-brand href="/" Информация о студентах
+        #navbar.navbar-collapse.collapse
+          ul.nav.navbar-nav.navbar-right
+            li
+              a href="/admin" Админка
+    .jumbotron
+      form.col-md-3
+        h2 Фильтры:
+        h3 Наличие фотографии
+        .btn-group.btn-block data-toggle="buttons"
+          label.btn.btn-primary
+            input type="radio" name="photo" value="yes" Есть
+          label.btn.btn-primary
+            input type="radio" name="photo" value="no" Нет
+          label.btn.btn-primary.active
+            input type="radio" name="photo" value="no matter" checked="true" Не важно
+        h3 Пол
+        .btn-group data-toggle="buttons"
+          label.btn.btn-primary
+            input type="radio" name="gender" value="male" Мужской
+          label.btn.btn-primary
+            input type="radio" name="gender" value="female" Женский
+          label.btn.btn-primary.active
+            input type="radio" name="gender" value="no matter" checked="true" Не важно
+        h3 Курс
+        input.form-control name="course"
+        h3 Страна
+        input.form-control name="country"
+      .col-md-9
+        ==yield
     
     / скрипты мы традиционно подключаем внизу
     

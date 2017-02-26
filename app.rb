@@ -34,7 +34,8 @@ end
 
 before do
   @students = DB[:students]
-  @studing_students = @students.where(is_studing: true).all
+  @studing_students = @students.where(is_studing: true).order(:student_surname)
+  @show_list = @studing_students.all
 end
 
 get '/' do
