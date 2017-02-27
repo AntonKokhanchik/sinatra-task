@@ -42,7 +42,7 @@ html lang="ru"
             li
               a href="/admin" Админка
     .jumbotron
-      form.col-md-3
+      form.col-md-3 action="/" method="get"
         h2 Фильтры:
         h3 Наличие фотографии
         .btn-group.btn-block data-toggle="buttons"
@@ -51,7 +51,7 @@ html lang="ru"
           label.btn.btn-primary
             input type="radio" name="photo" value="no" Нет
           label.btn.btn-primary.active
-            input type="radio" name="photo" value="no matter" checked="true" Не важно
+            input type="radio" name="photo" value="no_matter" checked="true" Не важно
         h3 Пол
         .btn-group data-toggle="buttons"
           label.btn.btn-primary
@@ -59,11 +59,12 @@ html lang="ru"
           label.btn.btn-primary
             input type="radio" name="gender" value="female" Женский
           label.btn.btn-primary.active
-            input type="radio" name="gender" value="no matter" checked="true" Не важно
+            input type="radio" name="gender" value="no_matter" checked="true" Не важно
         h3 Курс
         input.form-control name="course"
         h3 Страна
         input.form-control name="country"
+        button.btn-primary применить
       .col-md-9
         ==yield
     
