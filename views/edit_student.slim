@@ -1,0 +1,56 @@
+h1 Редактирование данных студента ID:#{@student.id}
+
+.container
+
+  form.form-horizontal action="/admin/edit_student/#{@student.id}" enctype="multipart/form-data" method="post"
+  
+    .form-group
+      label.control-label for="student_surname" Фамилия *
+      input.form-control type="text" name='student_surname' required="required" value="#{@student.student_surname}"
+    
+    .form-group
+      label.control-label for="student_surname" Имя *
+      input.form-control type="text" name='student_name' required="required" value="#{@student.student_name}"
+    
+    .form-group
+      label.control-label for="student_middlename" Отчество
+      input.form-control type="text" name='student_middlename' value="#{@student.student_middlename}"
+    
+    .form-group
+      label.control-label Пол *
+      br
+      label.radio-inline
+        input type="radio" checked=("checked" if @student.is_male == true) name='is_male' value="true" Мужской
+      label.radio-inline
+        input type="radio" checked=("checked" if @student.is_male == false) name='is_male' value="false" Женский
+    
+    .form-group
+      label.control-label for="course" Курс обучения *
+      input.form-control type="text" name='course' value="#{@student.course}" required="required"
+    
+    .form-group
+      label.control-label for="from_country" Страна, из которой прибыл студент *
+      input.form-control type="text" name='from_country' value="#{@student.from_country}" required="required"
+    
+    .form-group
+      label.control-label for="from_city" Город, из которого прибыл студент *
+      input.form-control type="text" name='from_city' value="#{@student.from_city}" required="required"
+    
+    .form-group
+      label.control-label for="from_university" Университет, из которого прибыл студент *
+      input.form-control type="text" name='from_university' value="#{@student.from_university}" required="required"
+    
+    .form-group
+      label.control-label for="from_course" Курс, с которого студент переведён *
+      input.form-control type="text" name='from_course' value="#{@student.from_course}" required="required"
+    
+    .form-group
+      label.control-label Академическая разница сдана *
+      br
+      label.radio-inline
+        input type="radio" checked=("checked" if @student.is_examined == true) name='is_examined' value="true" Да
+      label.radio-inline
+        input type="radio" checked=("checked" if @student.is_examined == false) name='is_examined' value="false" Нет
+    
+    .form-group
+      input.button.btn.btn-primary type="submit" value=("СОХРАНИТЬ")

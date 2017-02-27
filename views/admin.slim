@@ -15,7 +15,7 @@ table.table.table-striped
       th Разница сдана
       th 
         form
-          button.btn.btn-primary Добавить
+          a.btn.btn-success.btn-block href="/admin/add_student" Добавить
   tbody
     -@show_list.each do |student|
       tr
@@ -24,7 +24,10 @@ table.table.table-striped
         td = student[:student_name]
         td = student[:student_surname]
         td = student[:student_middlename]
-        td = if student[:is_male] then "мужской" else "женский"
+        -if student[:is_male] then 
+          td="мужской" 
+        -else 
+          td="женский"
         td = student[:course]
         td = student[:from_country]
         td = student[:from_city]
@@ -32,7 +35,7 @@ table.table.table-striped
         td = student[:from_course]
         td = student[:is_examined]
         td
-          form.btn-group-vertical
-              button.btn.btn-primary Редактировать
-              button.btn.btn-primary Отчислить
+          .btn-group-vertical
+              a.btn.btn-primary.btn-block href="/admin/edit_student/#{student[:id]}" Редактировать
+              button.btn.btn-danger.btn-block Отчислить
               

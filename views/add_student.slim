@@ -1,0 +1,55 @@
+h1 Добавление студента
+.container
+
+  form.form-horizontal action="/admin/add_student" enctype="multipart/form-data" method="post"
+  
+    .form-group
+      label.control-label for="student_surname" Фамилия *
+      input.form-control type="text" name='student_surname' required="required"
+    
+    .form-group
+      label.control-label for="student_surname" Имя *
+      input.form-control type="text" name='student_name' required="required"
+    
+    .form-group
+      label.control-label for="student_middlename" Отчество
+      input.form-control type="text" name='student_middlename' 
+    
+    .form-group
+      label.control-label Пол *
+      br
+      label.radio-inline
+        input type="radio" checked="checked" name='is_male' value="true" Мужской
+      label.radio-inline
+        input type="radio" name='is_male' value="false" Женский
+    
+    .form-group
+      label.control-label for="course" Курс обучения *
+      input.form-control type="text" name='course' required="required"
+    
+    .form-group
+      label.control-label for="from_country" Страна, из которой прибыл студент *
+      input.form-control type="text" name='from_country' required="required"
+    
+    .form-group
+      label.control-label for="from_city" Город, из которого прибыл студент *
+      input.form-control type="text" name='from_city' required="required"
+    
+    .form-group
+      label.control-label for="from_university" Университет, из которого прибыл студент *
+      input.form-control type="text" name='from_university' required="required"
+    
+    .form-group
+      label.control-label for="from_course" Курс, с которого студент переведён *
+      input.form-control type="text" name='from_course' required="required"
+    
+    .form-group
+      label.control-label Академическая разница сдана *
+      br
+      label.radio-inline
+        input type="radio" name='is_examined' value="true" Да
+      label.radio-inline
+        input type="radio" checked="checked" name='is_examined' value="false" Нет
+    
+    .form-group
+      input.button.btn.btn-primary type="submit" value=("СОХРАНИТЬ")

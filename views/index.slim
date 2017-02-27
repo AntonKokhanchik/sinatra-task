@@ -3,8 +3,8 @@ table.table.table-striped
   thead
     tr
       th Фото
-      th Имя
       th Фамилия
+      th Имя
       th Отчество
       th Пол
       th Курс
@@ -18,10 +18,13 @@ table.table.table-striped
       tr
         td
           img src="#{student[:photo]}"
-        td = student[:student_name]
         td = student[:student_surname]
+        td = student[:student_name]
         td = student[:student_middlename]
-        td = if student[:is_male] then "мужской" else "женский"
+        -if student[:is_male] then 
+          td="мужской" 
+        -else 
+          td="женский"
         td = student[:course]
         td = student[:from_country]
         td = student[:from_city]

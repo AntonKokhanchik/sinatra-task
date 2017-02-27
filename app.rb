@@ -68,6 +68,49 @@ get '/' do
 end
 
 get '/admin' do
-  slim  :admin,                                 # задаем индексную страницу и указываем шаблонизатор
+  slim  :admin,
         :layout => "layouts/admin_l".to_sym
+end
+
+get '/admin/edit_student/:id' do
+  @student = @studing_students.where(id: params[:id]).first
+  slim  :edit_student,
+        :layout => "layouts/admin_l".to_sym
+end
+
+post '/admin/edit_student/:id' do
+  @students.where(id: params[:id]).update( {
+    :student_surname => params[:student_surname],
+    :student_name => params[:student_name],
+    :student_middlename => params[:student_middlename],
+    :is_male => params[:is_male],
+    :course => params[:course],
+    :is_examined => params[:is_examined],
+    :from_university => params[:from_university],
+    :from_city => params[:from_city],
+    :from_country => params[:from_country],
+    :from_course => params[:from_course]
+  } )
+  redirect "/admin"
+end
+
+get '/admin/add_student' do
+  slim  :add_student,
+        :layout => "layouts/admin_l".to_sym
+end
+
+post '/admin/add_student' do
+  @students.insert( {
+    :student_surname => params[:student_surname],
+    :student_name => params[:student_name],
+    :student_middlename => params[:student_middlename],
+    :is_male => params[:is_male],
+    :course => params[:course],
+    :is_examined => params[:is_examined],
+    :from_university => params[:from_university],
+    :from_city => params[:from_city],
+    :from_country => params[:from_country],
+    :from_course => params[:from_course]
+  } )
+  redirect "/admin"
 end
