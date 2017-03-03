@@ -35,7 +35,7 @@ table.table.table-striped
         td = student[:from_course]
         td = student[:is_examined]
         td
-          .btn-group-vertical
-              a.btn.btn-primary.btn-block href="/admin/edit_student/#{student[:id]}" Редактировать
-              button.btn.btn-danger.btn-block Отчислить
-              
+          a.left.btn.btn-primary.btn-block href="/admin/edit_student/#{student[:id]}" Редактировать
+          form action="/admin/dismiss" method="post"
+            button.left.btn.btn-danger.btn-block name="destroy" value="#{student[:id]}" Отчислить
+            
