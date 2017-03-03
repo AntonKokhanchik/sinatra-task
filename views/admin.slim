@@ -14,8 +14,7 @@ table.table.table-striped
       th Бывший курс
       th Разница сдана
       th 
-        form
-          a.btn.btn-success.btn-block href="/admin/add_student" Добавить
+        a.btn.btn-success.btn-block href="/admin/add_student" Добавить
   tbody
     -@show_list.each do |student|
       tr
@@ -35,7 +34,7 @@ table.table.table-striped
         td = student[:from_course]
         td = student[:is_examined]
         td
-          a.left.btn.btn-primary.btn-block href="/admin/edit_student/#{student[:id]}" Редактировать
+          a.btn.btn-primary.btn-block href="/admin/edit_student/#{student[:id]}" Редактировать
           form action="/admin/dismiss" method="post"
-            button.left.btn.btn-danger.btn-block name="destroy" value="#{student[:id]}" Отчислить
+            button.btn.btn-danger.btn-block name="dismiss" value="#{student[:id]}" Отчислить
             

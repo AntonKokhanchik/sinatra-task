@@ -136,7 +136,7 @@ post '/admin/add_student' do
 end
 
 post '/admin/dismiss' do
-  dismissing = @studing_students.where(id: params[:dismiss]).update(is_studing: false)
+  @studing_students.where(id: params[:dismiss]).update(is_studing: false)
   redirect "/admin"
 end
 
