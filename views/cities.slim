@@ -6,7 +6,6 @@ table.table.table-striped
       th город
       th страна
       th.col-md-1
-          a.btn.btn-success.btn-block href="/admin/add_university" Добавить
   tbody
     -@cities.each do |city|
       tr
@@ -16,3 +15,16 @@ table.table.table-striped
         td 
           form action="/admin/delete/city" method="post"
             button.btn.btn-danger.btn-block name="delete" value="#{city[:id]}" Убрать из списка
+    form method="post" action="/admin/add/city"
+      tr
+        td новый
+        td
+          input.form-control type="text" name='city_name' required="required" placeholder="Добавить город"
+        td
+          select.form-control name="country_id" required="required"
+            option value=""
+              | -- Укажите страну --
+              - @countries.each do |country|
+                option value="#{country[:id]}" = country[:country_name]
+        td 
+          button.btn.btn-success.btn-block  Добавить

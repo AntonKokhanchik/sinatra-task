@@ -135,6 +135,29 @@ post '/admin/add_student' do
   redirect "/admin"
 end
 
+post '/admin/add/city' do
+  @cities.insert( {
+    city_name: params[:city_name],
+    country_id: params[:country_id]
+    } )
+    redirect '/admin/cities'
+end
+
+post '/admin/add/country' do
+  @countries.insert( {
+    country_name: params[:country_name]
+    } )
+    redirect '/admin/countries'
+end
+
+post '/admin/add/university' do
+  @universities.insert( {
+    university_name: params[:university_name],
+    city_id: params[:city_id]
+    } )
+    redirect '/admin/universities'
+end
+
 post '/admin/dismiss' do
   @studing_students.where(id: params[:dismiss]).update(is_studing: false)
   redirect "/admin"
