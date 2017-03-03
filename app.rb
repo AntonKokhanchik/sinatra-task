@@ -42,29 +42,32 @@ end
 # TODO: реализовать неизменность формы при фильтрации
 get '/' do
   @show_list = @studing_students
-  if params[:photo] == "yes"
-    @show_list = @show_list.exclude(:photo => nil)
-  elsif params[:photo] == "no"
-      @show_list = @show_list.where(:photo => nil)
-  end
 
-  if params[:gender] == "male"
-    @show_list = @show_list.where(:is_male => true)
-  elsif params[:gender] == "female"
-    @show_list = @show_list.where(:is_male => false)
-  end
+  if params[:photo]!=nil
+    if params[:photo] == "yes"
+      @show_list = @show_list.exclude(:photo => nil)
+    elsif params[:photo] == "no"
+        @show_list = @show_list.where(:photo => nil)
+    end
 
-  if params[:course] != ""
-    @show_list = @show_list.where(:course => params[:course])
-  end
+    if params[:gender] == "male"
+      @show_list = @show_list.where(:is_male => true)
+    elsif params[:gender] == "female"
+      @show_list = @show_list.where(:is_male => false)
+    end
 
-  if params[:country] != ""
-    @show_list = @show_list.where(:from_country => params[:country])
-  end
+    if params[:course] != ""
+      @show_list = @show_list.where(:course => params[:course])
+    end
 
+    if params[:country] != ""
+      @show_list = @show_list.where(:from_country => params[:country])
+    end
+  end
   @show_list = @show_list.all
   slim  :index,
-        :layout => "layouts/app".to_sym
+        :layout => "layouts/app".to_sym,
+        :locals => {:gender => params[:gender], :photo => params[:photo], :course => params[:course], :from_country => params[:country]}
 end
 
 get '/admin' do

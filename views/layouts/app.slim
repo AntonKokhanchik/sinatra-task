@@ -46,25 +46,26 @@ html lang="ru"
         h2 Фильтры:
         h3 Наличие фотографии
         .btn-group.btn-block data-toggle="buttons"
-          label.btn.btn-primary
-            input type="radio" name="photo" value="yes" Есть
-          label.btn.btn-primary
-            input type="radio" name="photo" value="no" Нет
-          label.btn.btn-primary.active
-            input type="radio" name="photo" value="no_matter" checked="true" Не важно
+          label.btn.btn-primary class=("active" if "#{photo}" == "yes")
+            input type="radio" name="photo" value="yes" checked=("checked" if "#{photo}" == "yes") Есть
+          label.btn.btn-primary class=("active" if "#{photo}" == "no")
+            input type="radio" name="photo" value="no" checked=("checked" if "#{photo}" == "no") Нет
+          label.btn.btn-primary class=("active" if "#{photo}" == "no_matter" || "#{gender}" == "")
+            input type="radio" name="photo" value="no_matter" checked=("checked" if "#{photo}" == "no_matter" || "#{gender}" == "") Не важно
         h3 Пол
         .btn-group data-toggle="buttons"
-          label.btn.btn-primary
-            input type="radio" name="gender" value="male" Мужской
-          label.btn.btn-primary
-            input type="radio" name="gender" value="female" Женский
-          label.btn.btn-primary.active
-            input type="radio" name="gender" value="no_matter" checked="true" Не важно
+          label.btn.btn-primary class=("active" if "#{gender}" == "male")
+            input type="radio" name="gender" value="male" checked=("checked" if "#{gender}" == "male") Мужской
+          label.btn.btn-primary class=("active" if "#{gender}" == "female")
+            input type="radio" name="gender" value="female" checked=("checked" if "#{gender}" == "female") Женский
+          label.btn.btn-primary class=("active" if "#{gender}" == "no_matter" || "#{gender}" == "")
+            input type="radio" name="gender" value="no_matter" checked=("checked" if "#{gender}" == "no_matter" || "#{gender}" == "") Не важно
         h3 Курс
-        input.form-control name="course"
+        input.form-control name="course" value="#{course}"
         h3 Страна
-        input.form-control name="country"
-        button.btn-primary применить
+        input.form-control name="country" value="#{from_country}"
+        br
+        button.btn.btn-primary применить
       .col-md-9
         ==yield
     
