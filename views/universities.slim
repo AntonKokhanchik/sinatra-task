@@ -1,0 +1,21 @@
+h1 Университеты:
+table.table.table-striped
+  thead
+    tr
+      th id
+      th Университет 
+      th город
+      th страна
+      th.col-md-1
+        a.btn.btn-success.btn-block href="/admin/add_university" Добавить
+  tbody
+    -@universities.each do |university|
+      tr
+        td =university[:id]
+        td =university[:university_name]
+        -city = @cities.where(id: university[:city_id]).first
+        td =city[:city_name]
+        td =@countries.where(id: city[:country_id]).first[:country_name]
+        td 
+          form action="/admin/delete/university" method="post"
+            button.btn.btn-danger.btn-block name="delete" value="#{university[:id]}" Убрать из списка

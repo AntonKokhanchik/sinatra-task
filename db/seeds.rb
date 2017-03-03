@@ -20,4 +20,16 @@ DB.transaction do
       :photo => Faker::Avatar.image(slug = nil, size = '128x128', format = 'png', set = 'students_photos', bgset = nil),
     } )
   end
+
+  DB[:countries].import( [:country_name],
+    [ ["Великобритания"], ["США"], ["Германия"] ]
+  )
+
+  DB[:cities].import( [:city_name, :country_id],
+    [ ["Оксфорд", 1], ["Принстон", 2], ["Гамбург", 3] ]
+  )
+
+  DB[:universities].import( [:university_name, :city_id],
+    [ ["Оксфорд", 1], ["Принстон", 2], ["International School of Management (ISM)", 3] ]
+  )
 end

@@ -37,6 +37,9 @@ before do
   @students = DB[:students]
   @studing_students = @students.where(is_studing: true).order(:student_surname)
   @show_list = @studing_students.all
+  @cities = DB[:cities]
+  @countries = DB[:countries]
+  @universities = DB[:universities]
 end
 
 get '/' do
@@ -71,6 +74,21 @@ end
 
 get '/admin' do
   slim  :admin,
+        :layout => "layouts/admin_l".to_sym
+end
+
+get '/admin/cities' do
+  slim  :cities,
+        :layout => "layouts/admin_l".to_sym
+end
+
+get '/admin/universities' do
+  slim  :universities,
+        :layout => "layouts/admin_l".to_sym
+end
+
+get '/admin/countries' do
+  slim  :countries,
         :layout => "layouts/admin_l".to_sym
 end
 
@@ -120,4 +138,19 @@ end
 post '/admin/dismiss' do
   dismissing = @studing_students.where(id: params[:dismiss]).update(is_studing: false)
   redirect "/admin"
+end
+
+post '/admin/delete/university' do
+  @universities.where(id: params[:delete]).update(is_partner: false)
+  redirect "/admin/universities"
+end
+
+post '/admin/delete/city' do
+  @cities.where(id: params[:delete]).update(is_partner: false)
+  redirect "/admin/cities"
+end
+
+post '/admin/delete/country' do
+  @countries.where(id: params[:delete]).update(is_partner: false)
+  redirect "/admin/countries"
 end

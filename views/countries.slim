@@ -1,0 +1,16 @@
+h1 Страны:
+table.table.table-striped
+  thead
+    tr
+      th id
+      th Страна
+      th.col-md-1
+        a.btn.btn-success.btn-block href="/admin/add_university" Добавить
+  tbody
+    -@countries.each do |country|
+      tr
+        td =country[:id]
+        td =country[:country_name]
+        td 
+          form action="/admin/delete/country" method="post"
+            button.btn.btn-danger.btn-block name="delete" value="#{country[:id]}" Убрать из списка
