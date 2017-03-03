@@ -39,7 +39,6 @@ before do
   @show_list = @studing_students.all
 end
 
-# TODO: реализовать неизменность формы при фильтрации
 get '/' do
   @show_list = @studing_students
 
