@@ -37,9 +37,28 @@ before do
   @students = DB[:students]
   @studing_students = @students.where(is_studing: true).order(:student_surname)
   @show_list = @studing_students.all
-  @cities = DB[:cities]
-  @countries = DB[:countries]
-  @universities = DB[:universities]
+  @cities = DB[:cities].where(is_partner: true)
+  @countries = DB[:countries].where(is_partner: true)
+  @universities = DB[:universities].where(is_partner: true)
+end
+
+def delete_university id
+  @universities.where(id: id).update(is_partner: false)
+  # TODO: каскадное исключение студентов
+end
+
+def delete_city id
+  @cities.where(id: id).update(is_partner: false)
+  @universities.where(city_id: id).each do |university|
+    delete_university university[:id]
+  end
+end
+
+def delete_country id
+  @countries.where(id: id).update(is_partner: false)
+  @cities.where(country_id: id).each do |city|
+    delete_city city[:id]
+  end
 end
 
 get '/' do
@@ -164,16 +183,16 @@ post '/admin/dismiss' do
 end
 
 post '/admin/delete/university' do
-  @universities.where(id: params[:delete]).update(is_partner: false)
+  delete_university params[:delete]
   redirect "/admin/universities"
 end
 
 post '/admin/delete/city' do
-  @cities.where(id: params[:delete]).update(is_partner: false)
+  delete_city params[:delete]
   redirect "/admin/cities"
 end
 
 post '/admin/delete/country' do
-  @countries.where(id: params[:delete]).update(is_partner: false)
+  delete_country params[:delete]
   redirect "/admin/countries"
 end
