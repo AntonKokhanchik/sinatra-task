@@ -143,12 +143,12 @@ post '/admin/add_student' do
     :student_surname => params[:student_surname],
     :student_name => params[:student_name],
     :student_middlename => params[:student_middlename],
-    :is_male => params[:is_male],
+    :is_male => if params[:is_male]=='true' then true else false end,
     :course => params[:course],
-    :is_examined => params[:is_examined],
     :from_university => params[:from_university],
     :from_city => params[:from_city],
     :from_country => params[:from_country],
+    :is_examined => if params[:is_examined]=='true' then true else false end,
     :from_course => params[:from_course]
   } )
   redirect "/admin"
