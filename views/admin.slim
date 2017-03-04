@@ -17,6 +17,9 @@ table.table.table-striped
         a.btn.btn-success.btn-block href="/admin/add_student" Добавить
   tbody
     -@show_list.each do |student|
+      -university = @universities.where(id: student[:university_id]).first
+      -city = @cities.where(id: university[:city_id]).first
+      -country = @countries.where(id: city[:country_id]).first
       tr
         td
           img src="#{student[:photo]}"
@@ -28,13 +31,12 @@ table.table.table-striped
         -else 
           td="женский"
         td = student[:course]
-        td = student[:from_country]
-        td = student[:from_city]
-        td = student[:from_university]
+        td = country[:country_name]
+        td = city[:city_name]
+        td = university[:university_name]
         td = student[:from_course]
         td = student[:is_examined]
         td
           a.btn.btn-primary.btn-block href="/admin/edit_student/#{student[:id]}" Редактировать
           form action="/admin/dismiss" method="post"
             button.btn.btn-danger.btn-block name="dismiss" value="#{student[:id]}" Отчислить
-            

@@ -28,17 +28,14 @@ h1 Редактирование данных студента ID:#{@student.id}
       label.control-label for="course" Курс обучения *
       input.form-control type="text" name='course' value="#{@student.course}" required="required"
     
-    .form-group
-      label.control-label for="from_country" Страна, из которой прибыл студент *
-      input.form-control type="text" name='from_country' value="#{@student.from_country}" required="required"
-    
-    .form-group
-      label.control-label for="from_city" Город, из которого прибыл студент *
-      input.form-control type="text" name='from_city' value="#{@student.from_city}" required="required"
-    
-    .form-group
-      label.control-label for="from_university" Университет, из которого прибыл студент *
-      input.form-control type="text" name='from_university' value="#{@student.from_university}" required="required"
+    .form-group  
+      label.control-label for="university_id" Университет, из которого прибыл студент *
+      select.form-control name="university_id" required="required"
+        option value=""
+          | -- Укажите университет --
+          - @universities.each do |university|
+            -city = @cities.where(id: university[:city_id]).first
+            option selected=("selected" if @student.university_id == university[:id]) value="#{university[:id]}" = university[:university_name] + ", " + city[:city_name] + " (" + @countries.where(id: city[:country_id]).first[:country_name] + ")"
     
     .form-group
       label.control-label for="from_course" Курс, с которого студент переведён *

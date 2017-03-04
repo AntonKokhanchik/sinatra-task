@@ -82,13 +82,18 @@ get '/' do
     end
 
     if params[:country] != ""
-      @show_list = @show_list.where(:from_country => params[:country])
+      country = @countries.where(country_name: params[:country])
+      city = @cities.where(country_id: country.select(:id))
+      university = @universities.where(city_id: city.select(:id))
+      @show_list = @show_list.where(university_id: university.select(:id))
     end
   end
+
   @show_list = @show_list.all
+
   slim  :index,
         :layout => "layouts/app".to_sym,
-        :locals => {:gender => params[:gender], :photo => params[:photo], :course => params[:course], :from_country => params[:country]}
+        :locals => {:gender => params[:gender], :photo => params[:photo], :course => params[:course], :country => params[:country]}
 end
 
 get '/admin' do
@@ -125,9 +130,7 @@ post '/admin/edit_student/:id' do
     :is_male => if params[:is_male]=='true' then true else false end,
     :course => params[:course],
     :is_examined => if params[:is_examined]=='true' then true else false end,
-    :from_university => params[:from_university],
-    :from_city => params[:from_city],
-    :from_country => params[:from_country],
+    :university_id => params[:university_id],
     :from_course => params[:from_course]
   } )
   redirect "/admin"
@@ -145,10 +148,8 @@ post '/admin/add_student' do
     :student_middlename => params[:student_middlename],
     :is_male => if params[:is_male]=='true' then true else false end,
     :course => params[:course],
-    :from_university => params[:from_university],
-    :from_city => params[:from_city],
-    :from_country => params[:from_country],
     :is_examined => if params[:is_examined]=='true' then true else false end,
+    :university_id => params[:university_id],
     :from_course => params[:from_course]
   } )
   redirect "/admin"

@@ -15,6 +15,9 @@ table.table.table-striped
       th Разница сдана
   tbody
     -@show_list.each do |student|
+      -from_university = @universities.where(id: student[:university_id]).first
+      -from_city = @cities.where(id: from_university[:city_id]).first
+      -from_country = @countries.where(id: from_city[:country_id]).first
       tr
         td
           img src="#{student[:photo]}"
@@ -26,9 +29,9 @@ table.table.table-striped
         -else 
           td="женский"
         td = student[:course]
-        td = student[:from_country]
-        td = student[:from_city]
-        td = student[:from_university]
+        td = from_country[:country_name]
+        td = from_city[:city_name]
+        td = from_university[:university_name]
         td = student[:from_course]
         td = student[:is_examined]
     
