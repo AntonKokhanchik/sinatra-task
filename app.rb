@@ -97,32 +97,38 @@ get '/' do
 end
 
 get '/admin' do
+  protected!
   slim  :admin,
         :layout => "layouts/admin_l".to_sym
 end
 
 get '/admin/cities' do
+  protected!
   slim  :cities,
         :layout => "layouts/admin_l".to_sym
 end
 
 get '/admin/universities' do
+  protected!
   slim  :universities,
         :layout => "layouts/admin_l".to_sym
 end
 
 get '/admin/countries' do
+  protected!
   slim  :countries,
         :layout => "layouts/admin_l".to_sym
 end
 
 get '/admin/edit_student/:id' do
+  protected!
   @student = @studing_students.where(id: params[:id]).first
   slim  :edit_student,
         :layout => "layouts/admin_l".to_sym
 end
 
 post '/admin/edit_student/:id' do
+  protected!
   @students.where(id: params[:id]).update( {
     :student_surname => params[:student_surname],
     :student_name => params[:student_name],
@@ -137,11 +143,13 @@ post '/admin/edit_student/:id' do
 end
 
 get '/admin/add_student' do
+  protected!
   slim  :add_student,
         :layout => "layouts/admin_l".to_sym
 end
 
 post '/admin/add_student' do
+  protected!
   @students.insert( {
     :student_surname => params[:student_surname],
     :student_name => params[:student_name],
@@ -156,6 +164,7 @@ post '/admin/add_student' do
 end
 
 post '/admin/add/city' do
+  protected!
   @cities.insert( {
     city_name: params[:city_name],
     country_id: params[:country_id]
@@ -164,6 +173,7 @@ post '/admin/add/city' do
 end
 
 post '/admin/add/country' do
+  protected!
   @countries.insert( {
     country_name: params[:country_name]
     } )
@@ -171,6 +181,7 @@ post '/admin/add/country' do
 end
 
 post '/admin/add/university' do
+  protected!
   @universities.insert( {
     university_name: params[:university_name],
     city_id: params[:city_id]
@@ -179,21 +190,25 @@ post '/admin/add/university' do
 end
 
 post '/admin/dismiss' do
+  protected!
   @studing_students.where(id: params[:dismiss]).update(is_studing: false)
   redirect "/admin"
 end
 
 post '/admin/delete/university' do
+  protected!
   delete_university params[:delete]
   redirect "/admin/universities"
 end
 
 post '/admin/delete/city' do
+  protected!
   delete_city params[:delete]
   redirect "/admin/cities"
 end
 
 post '/admin/delete/country' do
+  protected!
   delete_country params[:delete]
   redirect "/admin/countries"
 end
